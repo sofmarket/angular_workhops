@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm">
+
+      <div class="form-group mt-3">
+        <label for="">Id :</label>
+        <input type="number" class="form-control" [(ngModel)]="product.id" name="id" #i="ngModel" required>
+        <div class="error text-danger" *ngIf="i.invalid && i.touched">
+          <p>le champ Id est invalid</p>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="">Title :</label>
+        <input type="text" class="form-control" [(ngModel)]="product.title" name="title" #t="ngModel" required minlength="3">
+        <div class="error text-danger" *ngIf="t.invalid && t.touched">
+          <p>Le champ title est invalid</p>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="">Quantity :</label>
+        <input type="number" class="form-control" [(ngModel)]="product.quantity" name="quantity" #q="ngModel" pattern="[1-9][0-9][0-9]">
+        <div class="error text-danger" *ngIf="q.invalid">
+          <p>Le champ quantity est invalid</p>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="">Price :</label>
+        <input type="number" class="form-control" [(ngModel)]="product.price" name="price" #p="ngModel" required>
+        <div class="error text-danger" *ngIf="p.invalid && p.touched">
+          <p>Le champ price est invalid</p>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <button class="btn btn-warning" [disabled]="f.invalid" (click)="saveProduct()">Save</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
