@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-products',
@@ -8,32 +9,24 @@ import { Product } from '../model/product';
 })
 export class ProductsComponent implements OnInit {
 
-  listProducts: Product[];
   list: Product[];
   maxPrice:any = '';
 
+  constructor(private productsService: ProductsService){ }
+
   ngOnInit(){
-    this.listProducts = [ ];
-    this.list = this.listProducts;
+    this.list = this.productsService.getProducts();
+    this.productsService.addEvent.subscribe((data) => {
+      console.log(data);
+    })
   }
 
   buy(product:Product){
-    console.log(product);
+    product.quantity--;
   }
 
   filter() {
-    if(this.maxPrice == '') this.list = this.listProducts;
-    else {
-      this.list = [];
-      for (let index = 0; index < this.listProducts.length; index++) {
-        if(this.listProducts[index].price <= this.maxPrice)
-          this.list.push(this.listProducts[index]);
-      }
-    }
-  }
 
-  addProdcut(product:Product) {
-    this.list.push(product);
   }
 
 }

@@ -1,13 +1,23 @@
-<tr>
-  <td>{{ product.id }}</td>
-  <td>{{ product.title }}</td>
-  <td>{{ product.price }}</td>
-  <td>{{ product.quantity }}</td>
-  <td>{{ product.like }}</td>
-  <td>
-    <button [disabled]="product.quantity==0" (click)="buy()">buy</button>
-  </td>
-  <td>
-    <button (click)="incementLike()">like</button>
-  </td>
-</tr>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">#{{ product.id }} {{ product.title }}</h5>
+    <div class="card-text">
+      <table class="table">
+        <tr>
+          <td>Price</td>
+          <td>{{ product.price }}</td>
+        </tr>
+        <tr>
+          <td>Quantity</td>
+          <td>{{ product.quantity }}</td>
+        </tr>
+        <tr>
+          <td>Likes</td>
+          <td>{{ product.like }}</td>
+        </tr>
+      </table>
+    </div>
+    <button class="btn btn-primary mr-4" [disabled]="product.quantity==0" (click)="buy()">buy</button>
+    <button class="btn btn-warning" (click)="incementLike()">like</button>
+  </div>
+</div>

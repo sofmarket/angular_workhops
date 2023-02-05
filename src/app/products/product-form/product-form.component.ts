@@ -12,6 +12,7 @@ export class ProductFormComponent implements OnInit {
   @Output('ajout') ajout: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
+    console.log('component product form initiated');
     this.product = new Product();
   }
 
