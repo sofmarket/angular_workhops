@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
 import { ProductsService } from '../products.service';
 
@@ -12,13 +13,12 @@ export class ProductsComponent implements OnInit {
   list: Product[];
   maxPrice:any = '';
 
-  constructor(private productsService: ProductsService){ }
+  constructor(private http: HttpClient){ }
 
   ngOnInit(){
-    this.list = this.productsService.getProducts();
-    this.productsService.addEvent.subscribe((data) => {
-      console.log(data);
-    })
+    this.http.get('http://localhost:5500/products').subscribe((products:any) => {
+      this.list = products;
+    });
   }
 
   buy(product:Product){

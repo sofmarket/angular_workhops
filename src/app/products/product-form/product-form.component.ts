@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/model/product';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-product-form',
@@ -7,6 +9,8 @@ import { Product } from 'src/app/model/product';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   product: Product;
   @Output('ajout') ajout: EventEmitter<any> = new EventEmitter();
@@ -17,7 +21,14 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveProduct() {
-    this.ajout.emit(this.product);
+    console.log(this.product);
+    this.http.post('http://localhost:5500/add', this.product).subscribe((res:any) => {
+
+      if(res.ok == true) {
+        this.router.navigate(['/products']);
+      }
+
+    });
   }
 
 }
